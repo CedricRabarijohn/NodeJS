@@ -1,0 +1,43 @@
+- Learn NodeJS: https://www.youtube.com/watch?v=HLPHoY-h7vc
+	-Installation (VITA)
+	-Premier Serveur: 
+		.Pour lancer, taper la commande 'node **nom_fichier**'
+		.Mettre à jour nodejs
+		.Aller sur le site de documentation nodejs OU sur le site " https://devdocs.io/node/ "
+		.inclure http en ecrivant le code similaire à " let http = require('http') "
+		.Ecouter un evenement :
+			o Creer une instance du serveur : 
+				.let server = http.createServer()
+			o Ecouter l'evenement :
+				server.on('request', (request, response) => {  
+				
+				})
+				server.listen(8080)
+			(tester en allant dans le lien "localhost:8080")
+			o ServerResponse:
+				o WriteHead : (anatinleh ecoute anah evenement(server.on))
+					. response.writeHead(200, {'Content-type':'text/html; charset=utf-8'})
+					. response.end('Salut comment ca va')
+				o Lire un fichier index.html:
+					.Documentation : File System
+					.let fs = require('fs')
+					.fs.readFile('index.html','utf8', (err, data) => {
+						if(err) throw err
+						response.writeHead(200, {'Content-type':'text/html; charset=utf-8'})
+						response.end(data)
+					})
+			o ServerResponse avec parametre :
+				. Docs : HTTP -> httpServer event request -> http.IncomingMessage -> message.url
+				. let url = new URL(req.url, `http://${req.headers.host}`)
+				. Exemple pour prendre la valeur du parametre :
+					console.log(url.searchParams.get('name'))
+				. Dans la lecture du fichier, on utilise la fonction 'replace' de javascript pour remplacer
+				des données dans le fichier index.html par exemple
+					o data = data.replace('{{ name }}',name)
+			o Evenement :
+				. Docs : Events -> EventEmitter
+				. const EventEmitter = require('events')
+				. Ex : let monEcouteur = new EventEmitter()
+
+					monEcouteur.on('saute', () => { console.log('Je saute')} )
+					monEcouteur.emit('saute')
